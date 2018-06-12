@@ -1,0 +1,72 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>اضافة شخص مفقود</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-list>
+
+    <ion-item>
+      <ion-label floating>اسم صاحب المنشور</ion-label>
+      <ion-input [(ngModel)]="data.namep" type="text"></ion-input>
+    </ion-item>
+  
+    <ion-item>
+      <ion-label floating>رقم الهاتف</ion-label>
+      <ion-input [(ngModel)]="data.phone" type="text"></ion-input>
+    </ion-item>
+    <br>
+
+    <ion-item>
+      <ion-label floating>اسم الشخص المفقود</ion-label>
+      <ion-input [(ngModel)]="data.namem" type="text"></ion-input>
+    </ion-item>
+<br>
+    <ion-list>
+      <ion-item>
+        <ion-label>الجنس</ion-label>
+        <ion-select [(ngModel)]="data.gander" multiple="false" okText="تم">
+          <ion-option value="ذكر" selected="true">ذكر</ion-option>
+          <ion-option value="انثى">انثى</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+
+    <ion-list>
+      <ion-item>
+        <ion-label>لعمر</ion-label>
+        <ion-select [(ngModel)]="data.age" multiple="false" cancelText="الغاء" okText="تم!">
+          <ion-option value="0" selected="true"></ion-option>
+          <ion-option value="من 0 سنه الى 10 سنوات">من 0 سنه الى 10 سنوات</ion-option>
+          <ion-option value="من 11 سنه الى 20 سنه">من 11 سنه الى 20 سنه</ion-option>
+          <ion-option value="من 21 سنه الى 30 سنه">من 21 سنه الى 30 سنه</ion-option>
+          <ion-option value="من 31 سنه الى 40 سنه">من 31 سنه الى 40 سنه</ion-option>
+          <ion-option value="من 41 سنه فما فوق"> من 41 سنه فما فوق</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+
+    <ion-item>
+      <ion-label floating>اضف وصف عن المفقود</ion-label>
+      <ion-input [(ngModel)]="data.commint" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>موقع تواجد المفقود</ion-label>
+      <ion-input [(ngModel)]="data.map" type="text"></ion-input>
+    </ion-item>
+    
+    <button ion-button block (click)="addData(data)">اضافة</button>
+
+
+
+
+  
+  </ion-list>
+
+</ion-content>

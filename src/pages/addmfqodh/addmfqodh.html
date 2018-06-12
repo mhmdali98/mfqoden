@@ -1,0 +1,65 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>اضافه شئ مفقود</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-list>
+
+    <ion-item>
+      <ion-label floating>اسم صاحب المنشور</ion-label>
+      <ion-input [(ngModel)]="datah.namep" type="text"></ion-input>
+    </ion-item>
+  
+    <ion-item>
+      <ion-label floating>رقم الهاتف</ion-label>
+      <ion-input [(ngModel)]="datah.phone" type="text"></ion-input>
+    </ion-item>
+    <br>
+
+    <ion-item>
+      <ion-label floating>اسم الشئ المفقود</ion-label>
+      <ion-input [(ngModel)]="datah.namem" type="text"></ion-input>
+    </ion-item>
+<br>
+    <ion-list>
+      <ion-item>
+        <ion-label>النوع</ion-label>
+        <ion-select [(ngModel)]="datah.type" multiple="false" okText="تم">
+          <ion-option value="مجوهرات" selected="true">مجوهرات</ion-option>
+          <ion-option value="نقود">نقود</ion-option>
+          <ion-option value="مستمسكات">مستمسكات</ion-option>
+          <ion-option value="هاتف ">هاتف</ion-option>
+          <ion-option value="اخرى">اخرى</ion-option>
+
+
+        </ion-select>
+      </ion-item>
+    </ion-list>
+
+ 
+
+    <ion-item>
+      <ion-label floating>اضف وصف عن الشئ المفقود</ion-label>
+      <ion-input [(ngModel)]="datah.commint" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>موقع تواجد الشئ المفقود</ion-label>
+      <ion-input [(ngModel)]="datah.map" type="text"></ion-input>
+    </ion-item>
+    
+    <button ion-button block (click)="addData(datah)">اضافة</button>
+
+
+
+
+  
+  </ion-list>
+
+</ion-content>

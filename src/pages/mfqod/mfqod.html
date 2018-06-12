@@ -1,0 +1,55 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title text-center>المفقودين</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding text-right>
+    <ion-searchbar (ionInput)='getItems($event)'></ion-searchbar>
+
+
+    <ion-list>
+        <ion-item>
+          <ion-label>الجنس</ion-label>
+          <ion-select (ionChange)='getItemsgan($event)'>
+              <ion-option value="">الكل</ion-option>
+            <ion-option value="ذكر">ذكر</ion-option>
+            <ion-option value="انثى">انثى</ion-option>
+           
+          </ion-select>
+        </ion-item>
+      </ion-list>
+
+      <ion-list>
+        <ion-item>
+          <ion-label>العمر</ion-label>
+          <ion-select (ionChange)='getItemsage($event)'>
+              <ion-option value="">الكل</ion-option>
+              <ion-option value="من 0 سنه الى 10 سنوات">من 0 سنه الى 10 سنوات</ion-option>
+              <ion-option value="من 11 سنه الى 20 سنه">من 11 سنه الى 20 سنه</ion-option>
+              <ion-option value="من 21 سنه الى 30 سنه">من 21 سنه الى 30 سنه</ion-option>
+              <ion-option value="من 31 سنه الى 40 سنه">من 31 سنه الى 40 سنه</ion-option>
+              <ion-option value="من 41 سنه فما فوق"> من 41 سنه فما فوق</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
+
+<div>
+  <ion-card *ngFor='let dat of items'>
+    <img src="../../assets/imgs/logo.png"/>
+    <ion-card-content>
+      <ion-card-title>اسم المفقود:
+    {{dat[1].namem}}
+      </ion-card-title>
+      <p>
+        الجنس: {{dat[1].gander}} , العمر: {{dat[1].age}}<br>تفاصل اخرى: {{dat[1].commint}}<br>موقع تواجده: {{dat[1].map}}<br>اسم صاحب المنشور: {{dat[1].namep}}<br>رقم الهاتف: {{dat[1].phone}}
+      </p>
+    </ion-card-content>
+  </ion-card>
+</div>
+
+</ion-content>

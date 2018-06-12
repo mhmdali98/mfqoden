@@ -1,0 +1,57 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>التسجيل في التطبيق</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-list>
+
+
+    <ion-item>
+      <ion-label floating>البريد الالكتروني </ion-label>
+      <ion-input [(ngModel)]='data.email' type="email"></ion-input>
+    </ion-item>
+  
+    <ion-item>
+      <ion-label floating>كلمه المرور</ion-label>
+      <ion-input [(ngModel)]='data.password' type="password"></ion-input>
+    </ion-item>
+    <br>
+    <button ion-button color="dark" block style="font-size: 20px" (click)="Register()" >تسجيل</button>
+<br>
+    <button ion-button color="dark" block outline style="font-size: 20px"(click)="goToLog()">او دخول اذا كنت سجلت سابفا </button>
+    <br><hr><br>
+<button ion-button block outline style="font-size: 20px"(click)="logFacebook()">  
+    <ion-grid>
+        <ion-row>
+            <ion-col col-2>
+  <ion-icon name="logo-facebook"></ion-icon> </ion-col>
+  <ion-col col-8>
+  تسجيل دخول بحساب فيسبوك</ion-col>
+</ion-row>
+</ion-grid>
+</button>
+<br>
+<button ion-button block outline color="danger" style="font-size: 20px"(click)="logGoogle()">
+   <ion-grid>
+    <ion-row>
+        <ion-col col-2>
+            <ion-icon name="logo-google"></ion-icon>
+        </ion-col>
+
+      <ion-col col-8>تسجيل دخول بحساب google</ion-col>
+
+    </ion-row>
+  </ion-grid>
+  </button>
+
+
+  </ion-list>
+
+</ion-content>

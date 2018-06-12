@@ -1,0 +1,40 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title text-center>المفقودات</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding text-right>
+   
+
+<div> <ion-searchbar (ionInput)='getItems($event)'></ion-searchbar>
+  <ion-list>
+    <ion-item>
+      <ion-label>النوع</ion-label>
+      <ion-select (ionChange)='getItemstype($event)'>
+          <ion-option value="">الكل</ion-option>
+          <ion-option value="مجوهرات" >مجوهرات</ion-option>
+          <ion-option value="نقود">نقود</ion-option>
+          <ion-option value="مستمسكات">مستمسكات</ion-option>
+          <ion-option value="هاتف ">هاتف</ion-option>
+          <ion-option value="اخرى">اخرى</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+
+  <ion-card *ngFor='let dat of items'>
+     <img src="../../assets/imgs/logo.png"/>
+    <ion-card-content>
+      <ion-card-title>اسم الشئ:
+    {{dat[1].namem}}
+      </ion-card-title>
+      <p>
+        النوع: {{dat[1].type}}<br>تفاصل اخرى: {{dat[1].commint}}<br>موقع تواجده: {{dat[1].map}}<br>اسم صاحب المنشور: {{dat[1].namep}}<br>رقم الهاتف: {{dat[1].phone}}
+      </p>
+    </ion-card-content>
+  </ion-card>
+</div>
+</ion-content>

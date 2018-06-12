@@ -1,0 +1,50 @@
+
+
+
+
+<ion-content padding class="">
+
+  <ion-list>
+
+    <ion-item >
+      <ion-label floating class="text-right">البريد الالكتروني </ion-label>
+      <ion-input [(ngModel)]='data.email' type="text"></ion-input>
+    </ion-item>
+  
+    <ion-item>
+      <ion-label floating class="text-right">كلمه المرور</ion-label>
+      <ion-input [(ngModel)]='data.password' type="password"></ion-input>
+    </ion-item>
+  <br>
+    <button ion-button color="dark" block style="font-size: 20px" (click)="login()" >تسجيل الدخول </button>
+<br>
+    <button ion-button color="dark" block outline style="font-size: 20px"(click)="goToReg()">او التسجيل بحساب جديد </button>
+    <br><hr><br>
+<button ion-button block outline style="font-size: 20px"(click)="logFacebook()">  
+    <ion-grid>
+        <ion-row>
+            <ion-col col-2>
+  <ion-icon name="logo-facebook"></ion-icon> </ion-col>
+  <ion-col col-8>
+  تسجيل دخول بحساب فيسبوك</ion-col>
+</ion-row>
+</ion-grid>
+</button>
+<br>
+<button ion-button block outline color="danger" style="font-size: 20px"(click)="logGoogle()">
+   <ion-grid>
+    <ion-row>
+        <ion-col col-2>
+            <ion-icon name="logo-google"></ion-icon>
+        </ion-col>
+
+      <ion-col col-8>تسجيل دخول بحساب google</ion-col>
+
+    </ion-row>
+  </ion-grid>
+  </button>
+
+
+  </ion-list>
+
+</ion-content>
