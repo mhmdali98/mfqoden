@@ -1,6 +1,10 @@
-<ion-tabs>
-  <ion-tab [root]="tab1Root" tabTitle="الصغحة الرئيسيه" tabIcon="home"></ion-tab>
-  <ion-tab [root]="tab2Root" tabTitle="المفقودين" tabIcon="ios-people"></ion-tab>
-  <ion-tab [root]="tab3Root" tabTitle="المفقوات" tabIcon="ios-filing"></ion-tab>
-  <ion-tab [root]="tab4Root" tabTitle="اضافة" tabIcon="md-add-circle"></ion-tab>
+<ion-tabs color="color1">
+  <ion-tab  [root]="tab1Root" tabTitle="الرئيسية" tabIcon="ios-home-outline"></ion-tab>
+  <ion-tab [root]="tab2Root" tabTitle="مفقودات" tabIcon="ios-information-circle-outline"></ion-tab>
+  <ion-tab [root]="tab3Root" tabTitle="موجودات" tabIcon="ios-checkmark-circle-outline"></ion-tab>
+  <ion-tab [root]="tab4Root" tabTitle="اضافة" tabIcon="ios-add-circle-outline"></ion-tab>
+  <ion-tab [root]="tab4Root" tabTitle="اعدادات" tabIcon="ios-settings-outline"></ion-tab>
 </ion-tabs>
+<button ion-button menuToggle>
+  <ion-icon name="settings" color="color1"></ion-icon>
+</button>

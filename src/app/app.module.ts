@@ -17,7 +17,8 @@ import { AddmfqodPage } from '../pages/addmfqod/addmfqod';
 import { AddmfqodhPage } from '../pages/addmfqodh/addmfqodh';
 import { EditprofilePage } from '../pages/editprofile/editprofile';
 import { MypostPage } from '../pages/mypost/mypost';
-
+import { MainPage } from '../pages/main/main';
+import {AdditemPage} from '../pages/additem/additem';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AngularFireModule } from 'angularfire2';
@@ -25,6 +26,9 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { ServiceDataProvider } from '../providers/service-data/service-data';
 import { AuthServicesProvider } from '../providers/auth-services/auth-services';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireStorageModule,AngularFireStorage } from 'angularfire2/storage';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 
 
   export const firebaseConfig = {
@@ -54,7 +58,8 @@ import { AngularFireAuth } from 'angularfire2/auth';
     AddmfqodhPage,
     EditprofilePage,
     MypostPage,
-   
+    MainPage,
+    AdditemPage,
   ],
   imports: [
     BrowserModule,
@@ -79,7 +84,8 @@ import { AngularFireAuth } from 'angularfire2/auth';
     AddmfqodhPage,
     EditprofilePage,
     MypostPage,
-    
+    MainPage,
+    AdditemPage,
   ],
   providers: [
     StatusBar,
@@ -88,6 +94,11 @@ import { AngularFireAuth } from 'angularfire2/auth';
     ServiceDataProvider,
     AuthServicesProvider,
     AngularFireAuth,
+    AngularFirestoreModule, // imports firebase/firestore, only needed for database features
+    AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
+    AngularFireStorageModule,
+    AngularFireDatabaseModule ,AngularFireStorage
+    
     
   ]
 })

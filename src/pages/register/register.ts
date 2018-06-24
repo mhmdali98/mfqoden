@@ -48,25 +48,25 @@ export class RegisterPage {
     }
   )
   }
-  goToLog(){
-    this.navCtrl.push(LoginPage);
-  }
+  // goToLog(){
+  //   this.navCtrl.push(LoginPage);
+  // }
 
-  logFacebook(){
-    this.angularFireAuth.auth.signInWithPopup(
-      new firebase.auth.FacebookAuthProvider()).then(res =>{
-        console.log(res);
-      })
+  // logFacebook(){
+  //   this.angularFireAuth.auth.signInWithPopup(
+  //     new firebase.auth.FacebookAuthProvider()).then(res =>{
+  //       console.log(res);
+  //     })
     
-  }
+  // }
 
-  logGoogle(){
-    this.angularFireAuth.auth.signInWithPopup(
-      new firebase.auth.GoogleAuthProvider()).then(res =>{
-        console.log(res);
-      })
+  // logGoogle(){
+  //   this.angularFireAuth.auth.signInWithPopup(
+  //     new firebase.auth.GoogleAuthProvider()).then(res =>{
+  //       console.log(res);
+  //     })
     
-  }
+  // }
 
 
 }

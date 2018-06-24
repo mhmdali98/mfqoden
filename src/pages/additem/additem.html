@@ -1,0 +1,61 @@
+
+
+<ion-content padding>
+
+
+
+    <ion-list class="right" >
+        <ion-item>
+            <ion-label>  <ion-icon ios="ios-alert" md="md-alert" color="color1"> الحالة  </ion-icon></ion-label>
+            <ion-select [(ngModel)]="data.type" multiple="false" okText="تم" cancelText="اغلاق">
+              <ion-option value="lost">فقد</ion-option>
+              <ion-option value="found">عثر</ion-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+              <ion-label><ion-icon ios="ios-pin" md="md-pin" color="color1"> المدينة </ion-icon></ion-label>
+              <ion-select [(ngModel)]="data.city" multiple="false" okText="تم" cancelText="اغلاق">
+                <ion-option value="baghdad">بغداد</ion-option>
+                <ion-option value="basra">البصرة</ion-option>
+                <ion-option value="sulimanya">السليمانية</ion-option>
+                <ion-option value="karbala">كربلاء</ion-option>
+                <ion-option value="najaf">النجف</ion-option>
+                <ion-option value="dyala">ديالى</ion-option>
+                <ion-option value="mayssan">ميسان</ion-option>
+                <ion-option value="nassrya">الناصرية</ion-option>
+                <ion-option value="kirkuk">كركوك</ion-option>
+              </ion-select>
+            </ion-item>
+        
+
+        <ion-item >
+          <ion-label> <ion-icon color="color1" ios="ios-contact" md="md-contact"></ion-icon></ion-label>
+          <ion-input [(ngModel)]='data.title' type="text" placeholder="اسم العنصر"></ion-input>
+        </ion-item>
+      
+        <ion-item>
+          <ion-label >  <ion-icon ios="ios-call" md="md-call" color="color1"></ion-icon></ion-label>
+          <ion-input [(ngModel)]='data.phone' type="number" placeholder="رقم الهاتف" ></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label >  <ion-icon ios="ios-paper" md="md-paper" color="color1"></ion-icon></ion-label>
+            <ion-input [(ngModel)]='data.details' type="text" placeholder="تفاصيل" ></ion-input>
+          </ion-item>
+        
+          <!-- <div class="uk-margin">
+              <textarea class="uk-textarea" rows="5" placeholder="Details" name="details"[(ngModel)]="data.details"></textarea>
+          </div>
+ -->
+
+
+
+
+
+      
+      </ion-list>
+      
+      <div><button ion-button outline class="btn-login" (click)="addItem()"><ion-icon ios="ios-add" md="md-add"> اضف </ion-icon></button></div>
+
+
+
+</ion-content>

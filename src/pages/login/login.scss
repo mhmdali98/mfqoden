@@ -1,8 +1,19 @@
 page-login {
+    font-family: 'Droid Arabic Kufi', serif;
+
 }
-.bgcol{
-    background-color: steelblue;
-}
-.text-right{
-    text-align: right
-}
+
+
+.lostlogo{display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width:40%;
+padding-bottom: 50px;}
+     
+    input { 
+        text-align: right; 
+    
+    }
+    .text{ text-align: center;
+       
+        font-size: 15px;}

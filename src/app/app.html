@@ -1,1 +1,28 @@
-<ion-nav [root]="rootPage"></ion-nav>
+
+
+<ion-menu [content]="content">
+    <ion-header>
+      <ion-toolbar color="color1" >
+        <ion-title>اعدادات</ion-title>
+      </ion-toolbar>
+    </ion-header>
+  
+    <ion-content >
+      <ion-list>
+        <button  menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
+            <ion-icon color="first" style="padding-left:5px;" ios={{p.icon}} md={{p.md}}></ion-icon>
+     {{p.title}}
+         
+        </button>
+      </ion-list>
+    </ion-content>
+  
+  </ion-menu>
+  
+  <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
+  <ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
+
+
+
+
+<!-- <ion-nav [root]="rootPage"></ion-nav> -->

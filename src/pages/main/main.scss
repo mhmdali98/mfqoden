@@ -1,0 +1,65 @@
+page-main {
+
+    font-family: 'Droid Arabic Kufi', serif;
+   
+   
+}
+.bgcol{
+    background-color: steelblue;
+}
+.text-right{
+    text-align: right
+}
+.text-center{
+    text-align: center;
+    color: #ffffff;
+    font-size: 30px;
+}
+.center{display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width:70%;}
+    .logo{display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 70%;
+       }
+     .background{
+     
+        background-image: url('/assets/imgs/bg2.jpg');
+     
+        background-repeat: no-repeat;
+        background-size: 200% 100%;
+        
+       
+       
+      }
+      .btn-reg{
+          border-radius: 35px;
+          font-size: 20px;
+        margin-top: 50px;
+          color:#ffffff;
+          border-color: #ffffff;
+          width: 157px;
+          display: block;
+          margin-left: auto;
+          margin-right: auto;
+          height: 50px;
+      }
+      .btn-login{
+        
+          
+        border-radius: 35px;
+        font-size: 20px;
+      margin-top: 30px;
+        color:#ffffff;
+        border-color: #ffffff;
+        width: 157px;
+      background-color: #263d4f;
+     display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 50px;
+        
+    }
+   

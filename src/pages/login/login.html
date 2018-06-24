@@ -1,4 +1,79 @@
+<ion-header >
+  <ion-navbar color="color1">
+    
+  </ion-navbar></ion-header>
+<ion-content padding >
 
+
+
+<img src="assets/imgs/logo.png" class="lostlogo">
+
+
+
+
+<ion-list  padding>
+
+  <ion-item >
+    <ion-label> <ion-icon color="color1" ios="ios-contact" md="md-contact"></ion-icon></ion-label>
+    <ion-input [(ngModel)]='data.email' type="text" placeholder="البريد"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label >  <ion-icon color="color1"  ios="ios-key" md="md-key"></ion-icon></ion-label>
+    <ion-input [(ngModel)]='data.password' type="password" placeholder="كلمة المرور" ></ion-input>
+  </ion-item>
+
+</ion-list>
+
+<div><button ion-button outline class="btn-login" (click)="login()">دخول</button></div>
+ <h6 class="text" color="color1"><b>او الدخول بحساب</b></h6>
+
+<ion-grid>
+  
+  <ion-row>
+    <ion-col col-4><button ion-button clear><img src="assets/imgs/logo-facebook.png" class="logo"></button></ion-col>
+    <ion-col col-4><button ion-button clear><img src="assets/imgs/logo-twitter.png" class="logo"></button></ion-col>
+    <ion-col col-4><button ion-button clear><img src="assets/imgs/logo-google.png" class="logo"></button></ion-col>
+  </ion-row>
+</ion-grid>
+
+</ion-content>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
 
 
 
@@ -47,4 +122,4 @@
 
   </ion-list>
 
-</ion-content>
+</ion-content> -->

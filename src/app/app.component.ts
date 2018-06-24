@@ -5,13 +5,15 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { AuthServicesProvider } from '../providers/auth-services/auth-services';
 import { TabsPage } from '../pages/tabs/tabs';
 import { LoginPage } from '../pages/login/login';
+import { MainPage } from '../pages/main/main';
+import { HomePage } from '../pages/home/home';
 
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = LoginPage;
+  rootPage:any = TabsPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
                   public authServicesProvider:AuthServicesProvider) {
@@ -23,14 +25,14 @@ export class MyApp {
       splashScreen.hide();
     });
 
-    this.authServicesProvider.afAuth.authState.subscribe(user => {
-      if(user){
-        this.rootPage= TabsPage;
-      }else{
-        this.rootPage= LoginPage;
-      }
-    },
-    ()=>{this.rootPage= LoginPage})
+    // this.authServicesProvider.afAuth.authState.subscribe(user => {
+    //   if(!user){
+    //     this.rootPage= MainPage;
+    //   }else{
+    //     this.rootPage= MainPage;
+    //   }
+    // },
+    // ()=>{this.rootPage= LoginPage})
   }
   
 }
