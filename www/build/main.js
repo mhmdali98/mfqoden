@@ -1,17 +1,118 @@
 webpackJsonp([11],{
 
-/***/ 163:
+/***/ 169:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AdditemPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__ = __webpack_require__(126);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_storage__ = __webpack_require__(332);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+/**
+ * Generated class for the AdditemPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
+var AdditemPage = /** @class */ (function () {
+    function AdditemPage(navCtrl, navParams, afStorage, db) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.afStorage = afStorage;
+        this.db = db;
+        this.data = {
+            title: '',
+            city: '',
+            type: '',
+            img: '',
+            phone: '',
+            details: '',
+        };
+        this.SelectedFile = null;
+        this.submited = false;
+        this.agenicy = false;
+        this.abouts = false;
+        this.items = db.list('items');
+    }
+    AdditemPage.prototype.OnFileSelected = function (event) {
+        this.SelectedFile = event.target.files[0];
+        //console.log(this.SelectedFile)
+    };
+    AdditemPage.prototype.addItem = function () {
+        var _this = this;
+        this.items.push({
+            title: this.data.title,
+            city: this.data.city,
+            type: this.data.type,
+            img: this.data.img,
+            phone: this.data.phone,
+            details: this.data.details,
+        });
+        this.submited = true;
+        var id = Math.random().toString(36).substring(2);
+        this.afStorage.upload(id, this.SelectedFile).then(function () {
+            _this.ref = _this.afStorage.ref(id);
+            _this.ref.getDownloadURL().subscribe(function (url) {
+                console.log(url);
+                if (url) {
+                    if (_this.imageURL == "") {
+                        _this.imageURL = "assets/imgs/logo.png";
+                    }
+                    _this.imageURL = url;
+                    _this.submited = false;
+                    _this.items.push({
+                        title: _this.data.title,
+                        city: _this.data.city,
+                        type: _this.data.type,
+                        img: _this.imageURL,
+                        phone: _this.data.phone,
+                        details: _this.data.details,
+                    });
+                    //this.router.navigate(['/home'])
+                }
+            });
+        });
+    };
+    AdditemPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'page-additem',template:/*ion-inline-start:"/home/3losh/Desktop/mfqoden/src/pages/additem/additem.html"*/'\n\n<ion-content padding>\n\n\n\n    <ion-list class="right" >\n        <ion-item>\n            <ion-label>  <ion-icon ios="ios-alert" md="md-alert" color="color1"> الحالة  </ion-icon></ion-label>\n            <ion-select [(ngModel)]="data.type" multiple="false" okText="تم" cancelText="اغلاق">\n              <ion-option value="lost">فقد</ion-option>\n              <ion-option value="found">عثر</ion-option>\n            </ion-select>\n          </ion-item>\n          <ion-item>\n              <ion-label><ion-icon ios="ios-pin" md="md-pin" color="color1"> المدينة </ion-icon></ion-label>\n              <ion-select [(ngModel)]="data.city" multiple="false" okText="تم" cancelText="اغلاق">\n                <ion-option value="baghdad">بغداد</ion-option>\n                <ion-option value="basra">البصرة</ion-option>\n                <ion-option value="sulimanya">السليمانية</ion-option>\n                <ion-option value="karbala">كربلاء</ion-option>\n                <ion-option value="najaf">النجف</ion-option>\n                <ion-option value="dyala">ديالى</ion-option>\n                <ion-option value="mayssan">ميسان</ion-option>\n                <ion-option value="nassrya">الناصرية</ion-option>\n                <ion-option value="kirkuk">كركوك</ion-option>\n              </ion-select>\n            </ion-item>\n        \n\n        <ion-item >\n          <ion-label> <ion-icon color="color1" ios="ios-contact" md="md-contact"></ion-icon></ion-label>\n          <ion-input [(ngModel)]=\'data.title\' type="text" placeholder="اسم العنصر"></ion-input>\n        </ion-item>\n      \n        <ion-item>\n          <ion-label >  <ion-icon ios="ios-call" md="md-call" color="color1"></ion-icon></ion-label>\n          <ion-input [(ngModel)]=\'data.phone\' type="number" placeholder="رقم الهاتف" ></ion-input>\n        </ion-item>\n        <ion-item>\n            <ion-label >  <ion-icon ios="ios-paper" md="md-paper" color="color1"></ion-icon></ion-label>\n            <ion-input [(ngModel)]=\'data.details\' type="text" placeholder="تفاصيل" ></ion-input>\n          </ion-item>\n        \n          <!-- <div class="uk-margin">\n              <textarea class="uk-textarea" rows="5" placeholder="Details" name="details"[(ngModel)]="data.details"></textarea>\n          </div>\n -->\n\n\n\n\n\n      \n      </ion-list>\n      \n      <div><button ion-button outline class="btn-login" (click)="addItem()"><ion-icon ios="ios-add" md="md-add"> اضف </ion-icon></button></div>\n\n\n\n</ion-content>\n'/*ion-inline-end:"/home/3losh/Desktop/mfqoden/src/pages/additem/additem.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_3_angularfire2_storage__["a" /* AngularFireStorage */], __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__["a" /* AngularFireDatabase */]])
+    ], AdditemPage);
+    return AdditemPage;
+}());
+
+//# sourceMappingURL=additem.js.map
+
+/***/ }),
+
+/***/ 170:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AddPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__addmfqod_addmfqod__ = __webpack_require__(164);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__addmfqodh_addmfqodh__ = __webpack_require__(165);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__mypost_mypost__ = __webpack_require__(166);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_auth_services_auth_services__ = __webpack_require__(70);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__login_login__ = __webpack_require__(94);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__addmfqod_addmfqod__ = __webpack_require__(171);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__addmfqodh_addmfqodh__ = __webpack_require__(172);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__mypost_mypost__ = __webpack_require__(173);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_auth_services_auth_services__ = __webpack_require__(72);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__login_login__ = __webpack_require__(97);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -53,7 +154,7 @@ var AddPage = /** @class */ (function () {
     };
     AddPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-add',template:/*ion-inline-start:"C:\Users\Murtada\Desktop\mfqoden\src\pages\add\add.html"*/'\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title text-center>اضافة</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n\n\n  <button ion-button color="secondary" outline  large block (click)="goToAddMfqod()">اضافة شخص مفقود</button><br>\n\n  <button ion-button color="secondary" outline  large block (click)="goToAddMfqodh()">اضافة شئ مفقود</button><br>\n\n  <button ion-button color="" outline large  block (click)="goToMyPost()">منشوراتي</button><br>\n\n  <button ion-button color="danger" outline large block (click)="goToLogout()">تسجيل خروج</button><br>\n\n\n\n \n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Murtada\Desktop\mfqoden\src\pages\add\add.html"*/,
+            selector: 'page-add',template:/*ion-inline-start:"/home/3losh/Desktop/mfqoden/src/pages/add/add.html"*/'\n<ion-header>\n\n  <ion-navbar>\n    <ion-title text-center>اضافة</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n  <button ion-button color="secondary" outline  large block (click)="goToAddMfqod()">اضافة شخص مفقود</button><br>\n  <button ion-button color="secondary" outline  large block (click)="goToAddMfqodh()">اضافة شئ مفقود</button><br>\n  <button ion-button color="" outline large  block (click)="goToMyPost()">منشوراتي</button><br>\n  <button ion-button color="danger" outline large block (click)="goToLogout()">تسجيل خروج</button><br>\n\n \n</ion-content>\n'/*ion-inline-end:"/home/3losh/Desktop/mfqoden/src/pages/add/add.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_5__providers_auth_services_auth_services__["a" /* AuthServicesProvider */]])
@@ -65,15 +166,15 @@ var AddPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 164:
+/***/ 171:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AddmfqodPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_service_data_service_data__ = __webpack_require__(48);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_service_data_service_data__ = __webpack_require__(49);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth__ = __webpack_require__(41);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -133,7 +234,7 @@ var AddmfqodPage = /** @class */ (function () {
     };
     AddmfqodPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-addmfqod',template:/*ion-inline-start:"C:\Users\Murtada\Desktop\mfqoden\src\pages\addmfqod\addmfqod.html"*/'\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>اضافة شخص مفقود</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n\n\n  <ion-list>\n\n\n\n    <ion-item>\n\n      <ion-label floating>اسم صاحب المنشور</ion-label>\n\n      <ion-input [(ngModel)]="data.namep" type="text"></ion-input>\n\n    </ion-item>\n\n  \n\n    <ion-item>\n\n      <ion-label floating>رقم الهاتف</ion-label>\n\n      <ion-input [(ngModel)]="data.phone" type="text"></ion-input>\n\n    </ion-item>\n\n    <br>\n\n\n\n    <ion-item>\n\n      <ion-label floating>اسم الشخص المفقود</ion-label>\n\n      <ion-input [(ngModel)]="data.namem" type="text"></ion-input>\n\n    </ion-item>\n\n<br>\n\n    <ion-list>\n\n      <ion-item>\n\n        <ion-label>الجنس</ion-label>\n\n        <ion-select [(ngModel)]="data.gander" multiple="false" okText="تم">\n\n          <ion-option value="ذكر" selected="true">ذكر</ion-option>\n\n          <ion-option value="انثى">انثى</ion-option>\n\n        </ion-select>\n\n      </ion-item>\n\n    </ion-list>\n\n\n\n    <ion-list>\n\n      <ion-item>\n\n        <ion-label>لعمر</ion-label>\n\n        <ion-select [(ngModel)]="data.age" multiple="false" cancelText="الغاء" okText="تم!">\n\n          <ion-option value="0" selected="true"></ion-option>\n\n          <ion-option value="من 0 سنه الى 10 سنوات">من 0 سنه الى 10 سنوات</ion-option>\n\n          <ion-option value="من 11 سنه الى 20 سنه">من 11 سنه الى 20 سنه</ion-option>\n\n          <ion-option value="من 21 سنه الى 30 سنه">من 21 سنه الى 30 سنه</ion-option>\n\n          <ion-option value="من 31 سنه الى 40 سنه">من 31 سنه الى 40 سنه</ion-option>\n\n          <ion-option value="من 41 سنه فما فوق"> من 41 سنه فما فوق</ion-option>\n\n        </ion-select>\n\n      </ion-item>\n\n    </ion-list>\n\n\n\n    <ion-item>\n\n      <ion-label floating>اضف وصف عن المفقود</ion-label>\n\n      <ion-input [(ngModel)]="data.commint" type="text"></ion-input>\n\n    </ion-item>\n\n    <ion-item>\n\n      <ion-label floating>موقع تواجد المفقود</ion-label>\n\n      <ion-input [(ngModel)]="data.map" type="text"></ion-input>\n\n    </ion-item>\n\n    \n\n    <button ion-button block (click)="addData(data)">اضافة</button>\n\n\n\n\n\n\n\n\n\n  \n\n  </ion-list>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Murtada\Desktop\mfqoden\src\pages\addmfqod\addmfqod.html"*/,
+            selector: 'page-addmfqod',template:/*ion-inline-start:"/home/3losh/Desktop/mfqoden/src/pages/addmfqod/addmfqod.html"*/'\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>اضافة شخص مفقود</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n  <ion-list>\n\n    <ion-item>\n      <ion-label floating>اسم صاحب المنشور</ion-label>\n      <ion-input [(ngModel)]="data.namep" type="text"></ion-input>\n    </ion-item>\n  \n    <ion-item>\n      <ion-label floating>رقم الهاتف</ion-label>\n      <ion-input [(ngModel)]="data.phone" type="text"></ion-input>\n    </ion-item>\n    <br>\n\n    <ion-item>\n      <ion-label floating>اسم الشخص المفقود</ion-label>\n      <ion-input [(ngModel)]="data.namem" type="text"></ion-input>\n    </ion-item>\n<br>\n    <ion-list>\n      <ion-item>\n        <ion-label>الجنس</ion-label>\n        <ion-select [(ngModel)]="data.gander" multiple="false" okText="تم">\n          <ion-option value="ذكر" selected="true">ذكر</ion-option>\n          <ion-option value="انثى">انثى</ion-option>\n        </ion-select>\n      </ion-item>\n    </ion-list>\n\n    <ion-list>\n      <ion-item>\n        <ion-label>لعمر</ion-label>\n        <ion-select [(ngModel)]="data.age" multiple="false" cancelText="الغاء" okText="تم!">\n          <ion-option value="0" selected="true"></ion-option>\n          <ion-option value="من 0 سنه الى 10 سنوات">من 0 سنه الى 10 سنوات</ion-option>\n          <ion-option value="من 11 سنه الى 20 سنه">من 11 سنه الى 20 سنه</ion-option>\n          <ion-option value="من 21 سنه الى 30 سنه">من 21 سنه الى 30 سنه</ion-option>\n          <ion-option value="من 31 سنه الى 40 سنه">من 31 سنه الى 40 سنه</ion-option>\n          <ion-option value="من 41 سنه فما فوق"> من 41 سنه فما فوق</ion-option>\n        </ion-select>\n      </ion-item>\n    </ion-list>\n\n    <ion-item>\n      <ion-label floating>اضف وصف عن المفقود</ion-label>\n      <ion-input [(ngModel)]="data.commint" type="text"></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label floating>موقع تواجد المفقود</ion-label>\n      <ion-input [(ngModel)]="data.map" type="text"></ion-input>\n    </ion-item>\n    \n    <button ion-button block (click)="addData(data)">اضافة</button>\n\n\n\n\n  \n  </ion-list>\n\n</ion-content>\n'/*ion-inline-end:"/home/3losh/Desktop/mfqoden/src/pages/addmfqod/addmfqod.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_2__providers_service_data_service_data__["a" /* ServiceDataProvider */],
@@ -147,15 +248,15 @@ var AddmfqodPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 165:
+/***/ 172:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AddmfqodhPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_service_data_service_data__ = __webpack_require__(48);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_service_data_service_data__ = __webpack_require__(49);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth__ = __webpack_require__(41);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -213,7 +314,7 @@ var AddmfqodhPage = /** @class */ (function () {
     };
     AddmfqodhPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-addmfqodh',template:/*ion-inline-start:"C:\Users\Murtada\Desktop\mfqoden\src\pages\addmfqodh\addmfqodh.html"*/'\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>اضافه شئ مفقود</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n\n\n  <ion-list>\n\n\n\n    <ion-item>\n\n      <ion-label floating>اسم صاحب المنشور</ion-label>\n\n      <ion-input [(ngModel)]="datah.namep" type="text"></ion-input>\n\n    </ion-item>\n\n  \n\n    <ion-item>\n\n      <ion-label floating>رقم الهاتف</ion-label>\n\n      <ion-input [(ngModel)]="datah.phone" type="text"></ion-input>\n\n    </ion-item>\n\n    <br>\n\n\n\n    <ion-item>\n\n      <ion-label floating>اسم الشئ المفقود</ion-label>\n\n      <ion-input [(ngModel)]="datah.namem" type="text"></ion-input>\n\n    </ion-item>\n\n<br>\n\n    <ion-list>\n\n      <ion-item>\n\n        <ion-label>النوع</ion-label>\n\n        <ion-select [(ngModel)]="datah.type" multiple="false" okText="تم">\n\n          <ion-option value="مجوهرات" selected="true">مجوهرات</ion-option>\n\n          <ion-option value="نقود">نقود</ion-option>\n\n          <ion-option value="مستمسكات">مستمسكات</ion-option>\n\n          <ion-option value="هاتف ">هاتف</ion-option>\n\n          <ion-option value="اخرى">اخرى</ion-option>\n\n\n\n\n\n        </ion-select>\n\n      </ion-item>\n\n    </ion-list>\n\n\n\n \n\n\n\n    <ion-item>\n\n      <ion-label floating>اضف وصف عن الشئ المفقود</ion-label>\n\n      <ion-input [(ngModel)]="datah.commint" type="text"></ion-input>\n\n    </ion-item>\n\n    <ion-item>\n\n      <ion-label floating>موقع تواجد الشئ المفقود</ion-label>\n\n      <ion-input [(ngModel)]="datah.map" type="text"></ion-input>\n\n    </ion-item>\n\n    \n\n    <button ion-button block (click)="addData(datah)">اضافة</button>\n\n\n\n\n\n\n\n\n\n  \n\n  </ion-list>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Murtada\Desktop\mfqoden\src\pages\addmfqodh\addmfqodh.html"*/,
+            selector: 'page-addmfqodh',template:/*ion-inline-start:"/home/3losh/Desktop/mfqoden/src/pages/addmfqodh/addmfqodh.html"*/'\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>اضافه شئ مفقود</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n  <ion-list>\n\n    <ion-item>\n      <ion-label floating>اسم صاحب المنشور</ion-label>\n      <ion-input [(ngModel)]="datah.namep" type="text"></ion-input>\n    </ion-item>\n  \n    <ion-item>\n      <ion-label floating>رقم الهاتف</ion-label>\n      <ion-input [(ngModel)]="datah.phone" type="text"></ion-input>\n    </ion-item>\n    <br>\n\n    <ion-item>\n      <ion-label floating>اسم الشئ المفقود</ion-label>\n      <ion-input [(ngModel)]="datah.namem" type="text"></ion-input>\n    </ion-item>\n<br>\n    <ion-list>\n      <ion-item>\n        <ion-label>النوع</ion-label>\n        <ion-select [(ngModel)]="datah.type" multiple="false" okText="تم">\n          <ion-option value="مجوهرات" selected="true">مجوهرات</ion-option>\n          <ion-option value="نقود">نقود</ion-option>\n          <ion-option value="مستمسكات">مستمسكات</ion-option>\n          <ion-option value="هاتف ">هاتف</ion-option>\n          <ion-option value="اخرى">اخرى</ion-option>\n\n\n        </ion-select>\n      </ion-item>\n    </ion-list>\n\n \n\n    <ion-item>\n      <ion-label floating>اضف وصف عن الشئ المفقود</ion-label>\n      <ion-input [(ngModel)]="datah.commint" type="text"></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label floating>موقع تواجد الشئ المفقود</ion-label>\n      <ion-input [(ngModel)]="datah.map" type="text"></ion-input>\n    </ion-item>\n    \n    <button ion-button block (click)="addData(datah)">اضافة</button>\n\n\n\n\n  \n  </ion-list>\n\n</ion-content>\n'/*ion-inline-end:"/home/3losh/Desktop/mfqoden/src/pages/addmfqodh/addmfqodh.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_2__providers_service_data_service_data__["a" /* ServiceDataProvider */],
@@ -227,17 +328,17 @@ var AddmfqodhPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 166:
+/***/ 173:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MypostPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database_database__ = __webpack_require__(59);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_service_data_service_data__ = __webpack_require__(48);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__add_add__ = __webpack_require__(163);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_angularfire2_auth__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database_database__ = __webpack_require__(60);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_service_data_service_data__ = __webpack_require__(49);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__add_add__ = __webpack_require__(170);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_angularfire2_auth__ = __webpack_require__(41);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -329,7 +430,7 @@ var MypostPage = /** @class */ (function () {
     };
     MypostPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-mypost',template:/*ion-inline-start:"C:\Users\Murtada\Desktop\mfqoden\src\pages\mypost\mypost.html"*/'\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>منشوراتي</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n\n\n  <ion-list *ngFor=\'let data of myObject\'>\n\n    <ion-item-sliding *ngIf="data[1].uid === uiid">\n\n        \n\n      <ion-item>\n\n        <ion-avatar item-start>\n\n          <img src="../../assets/imgs/logo.png">\n\n        </ion-avatar>\n\n        <h2>{{data[1].namem}}</h2>\n\n      </ion-item>\n\n      \n\n      <ion-item-options side="right">\n\n        <button ion-button color="danger"(click)="remove(data[0])">\n\n          <ion-icon name="md-trash"></ion-icon>\n\n          Delete\n\n        </button>\n\n      </ion-item-options>\n\n      \n\n    </ion-item-sliding>\n\n  </ion-list>\n\n\n\n  <ion-list *ngFor=\'let dat of myObjecth\'>\n\n    \n\n    <ion-item-sliding *ngIf="dat[1].uid === uiid">\n\n      \n\n      <ion-item>\n\n        <ion-avatar item-start>\n\n          <img src="../../assets/imgs/logo.png">\n\n        </ion-avatar>\n\n        <h2>{{dat[1].namem}}</h2>\n\n      </ion-item>\n\n      \n\n      <ion-item-options side="right">\n\n        <button ion-button color="danger"\n\n        (click)="removeh(dat[0])"\n\n        >\n\n          <ion-icon name="md-trash"></ion-icon>\n\n          Delete\n\n        </button>\n\n      </ion-item-options>\n\n    \n\n    </ion-item-sliding>\n\n  </ion-list>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Murtada\Desktop\mfqoden\src\pages\mypost\mypost.html"*/,
+            selector: 'page-mypost',template:/*ion-inline-start:"/home/3losh/Desktop/mfqoden/src/pages/mypost/mypost.html"*/'\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>منشوراتي</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n  <ion-list *ngFor=\'let data of myObject\'>\n    <ion-item-sliding *ngIf="data[1].uid === uiid">\n        \n      <ion-item>\n        <ion-avatar item-start>\n          <img src="../../assets/imgs/logo.png">\n        </ion-avatar>\n        <h2>{{data[1].namem}}</h2>\n      </ion-item>\n      \n      <ion-item-options side="right">\n        <button ion-button color="danger"(click)="remove(data[0])">\n          <ion-icon name="md-trash"></ion-icon>\n          Delete\n        </button>\n      </ion-item-options>\n      \n    </ion-item-sliding>\n  </ion-list>\n\n  <ion-list *ngFor=\'let dat of myObjecth\'>\n    \n    <ion-item-sliding *ngIf="dat[1].uid === uiid">\n      \n      <ion-item>\n        <ion-avatar item-start>\n          <img src="../../assets/imgs/logo.png">\n        </ion-avatar>\n        <h2>{{dat[1].namem}}</h2>\n      </ion-item>\n      \n      <ion-item-options side="right">\n        <button ion-button color="danger"\n        (click)="removeh(dat[0])"\n        >\n          <ion-icon name="md-trash"></ion-icon>\n          Delete\n        </button>\n      </ion-item-options>\n    \n    </ion-item-sliding>\n  </ion-list>\n\n</ion-content>\n'/*ion-inline-end:"/home/3losh/Desktop/mfqoden/src/pages/mypost/mypost.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */],
@@ -345,15 +446,15 @@ var MypostPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 167:
+/***/ 174:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MfqodPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database_database__ = __webpack_require__(59);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_service_data_service_data__ = __webpack_require__(48);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database_database__ = __webpack_require__(60);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_service_data_service_data__ = __webpack_require__(49);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -423,7 +524,7 @@ var MfqodPage = /** @class */ (function () {
     };
     MfqodPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-mfqod',template:/*ion-inline-start:"C:\Users\Murtada\Desktop\mfqoden\src\pages\mfqod\mfqod.html"*/'\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title text-center>المفقودين</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding text-right>\n\n    <ion-searchbar (ionInput)=\'getItems($event)\'></ion-searchbar>\n\n\n\n\n\n    <ion-list>\n\n        <ion-item>\n\n          <ion-label>الجنس</ion-label>\n\n          <ion-select (ionChange)=\'getItemsgan($event)\'>\n\n              <ion-option value="">الكل</ion-option>\n\n            <ion-option value="ذكر">ذكر</ion-option>\n\n            <ion-option value="انثى">انثى</ion-option>\n\n           \n\n          </ion-select>\n\n        </ion-item>\n\n      </ion-list>\n\n\n\n      <ion-list>\n\n        <ion-item>\n\n          <ion-label>العمر</ion-label>\n\n          <ion-select (ionChange)=\'getItemsage($event)\'>\n\n              <ion-option value="">الكل</ion-option>\n\n              <ion-option value="من 0 سنه الى 10 سنوات">من 0 سنه الى 10 سنوات</ion-option>\n\n              <ion-option value="من 11 سنه الى 20 سنه">من 11 سنه الى 20 سنه</ion-option>\n\n              <ion-option value="من 21 سنه الى 30 سنه">من 21 سنه الى 30 سنه</ion-option>\n\n              <ion-option value="من 31 سنه الى 40 سنه">من 31 سنه الى 40 سنه</ion-option>\n\n              <ion-option value="من 41 سنه فما فوق"> من 41 سنه فما فوق</ion-option>\n\n          </ion-select>\n\n        </ion-item>\n\n      </ion-list>\n\n\n\n<div>\n\n  <ion-card *ngFor=\'let dat of items\'>\n\n    <img src="../../assets/imgs/logo.png"/>\n\n    <ion-card-content>\n\n      <ion-card-title>اسم المفقود:\n\n    {{dat[1].namem}}\n\n      </ion-card-title>\n\n      <p>\n\n        الجنس: {{dat[1].gander}} , العمر: {{dat[1].age}}<br>تفاصل اخرى: {{dat[1].commint}}<br>موقع تواجده: {{dat[1].map}}<br>اسم صاحب المنشور: {{dat[1].namep}}<br>رقم الهاتف: {{dat[1].phone}}\n\n      </p>\n\n    </ion-card-content>\n\n  </ion-card>\n\n</div>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Murtada\Desktop\mfqoden\src\pages\mfqod\mfqod.html"*/,
+            selector: 'page-mfqod',template:/*ion-inline-start:"/home/3losh/Desktop/mfqoden/src/pages/mfqod/mfqod.html"*/'\n<ion-header>\n\n  <ion-navbar>\n    <ion-title text-center>المفقودين</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding text-right>\n    <ion-searchbar (ionInput)=\'getItems($event)\'></ion-searchbar>\n\n\n    <ion-list>\n        <ion-item>\n          <ion-label>الجنس</ion-label>\n          <ion-select (ionChange)=\'getItemsgan($event)\'>\n              <ion-option value="">الكل</ion-option>\n            <ion-option value="ذكر">ذكر</ion-option>\n            <ion-option value="انثى">انثى</ion-option>\n           \n          </ion-select>\n        </ion-item>\n      </ion-list>\n\n      <ion-list>\n        <ion-item>\n          <ion-label>العمر</ion-label>\n          <ion-select (ionChange)=\'getItemsage($event)\'>\n              <ion-option value="">الكل</ion-option>\n              <ion-option value="من 0 سنه الى 10 سنوات">من 0 سنه الى 10 سنوات</ion-option>\n              <ion-option value="من 11 سنه الى 20 سنه">من 11 سنه الى 20 سنه</ion-option>\n              <ion-option value="من 21 سنه الى 30 سنه">من 21 سنه الى 30 سنه</ion-option>\n              <ion-option value="من 31 سنه الى 40 سنه">من 31 سنه الى 40 سنه</ion-option>\n              <ion-option value="من 41 سنه فما فوق"> من 41 سنه فما فوق</ion-option>\n          </ion-select>\n        </ion-item>\n      </ion-list>\n\n<div>\n  <ion-card *ngFor=\'let dat of items\'>\n    <img src="../../assets/imgs/logo.png"/>\n    <ion-card-content>\n      <ion-card-title>اسم المفقود:\n    {{dat[1].namem}}\n      </ion-card-title>\n      <p>\n        الجنس: {{dat[1].gander}} , العمر: {{dat[1].age}}<br>تفاصل اخرى: {{dat[1].commint}}<br>موقع تواجده: {{dat[1].map}}<br>اسم صاحب المنشور: {{dat[1].namep}}<br>رقم الهاتف: {{dat[1].phone}}\n      </p>\n    </ion-card-content>\n  </ion-card>\n</div>\n\n</ion-content>\n'/*ion-inline-end:"/home/3losh/Desktop/mfqoden/src/pages/mfqod/mfqod.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */],
@@ -437,15 +538,15 @@ var MfqodPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 168:
+/***/ 175:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MfqodhPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database_database__ = __webpack_require__(59);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_service_data_service_data__ = __webpack_require__(48);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database_database__ = __webpack_require__(60);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_service_data_service_data__ = __webpack_require__(49);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -510,7 +611,7 @@ var MfqodhPage = /** @class */ (function () {
     };
     MfqodhPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-mfqodh',template:/*ion-inline-start:"C:\Users\Murtada\Desktop\mfqoden\src\pages\mfqodh\mfqodh.html"*/'<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title text-center>المفقودات</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding text-right>\n\n   \n\n\n\n<div> <ion-searchbar (ionInput)=\'getItems($event)\'></ion-searchbar>\n\n  <ion-list>\n\n    <ion-item>\n\n      <ion-label>النوع</ion-label>\n\n      <ion-select (ionChange)=\'getItemstype($event)\'>\n\n          <ion-option value="">الكل</ion-option>\n\n          <ion-option value="مجوهرات" >مجوهرات</ion-option>\n\n          <ion-option value="نقود">نقود</ion-option>\n\n          <ion-option value="مستمسكات">مستمسكات</ion-option>\n\n          <ion-option value="هاتف ">هاتف</ion-option>\n\n          <ion-option value="اخرى">اخرى</ion-option>\n\n      </ion-select>\n\n    </ion-item>\n\n  </ion-list>\n\n\n\n  <ion-card *ngFor=\'let dat of items\'>\n\n     <img src="../../assets/imgs/logo.png"/>\n\n    <ion-card-content>\n\n      <ion-card-title>اسم الشئ:\n\n    {{dat[1].namem}}\n\n      </ion-card-title>\n\n      <p>\n\n        النوع: {{dat[1].type}}<br>تفاصل اخرى: {{dat[1].commint}}<br>موقع تواجده: {{dat[1].map}}<br>اسم صاحب المنشور: {{dat[1].namep}}<br>رقم الهاتف: {{dat[1].phone}}\n\n      </p>\n\n    </ion-card-content>\n\n  </ion-card>\n\n</div>\n\n</ion-content>'/*ion-inline-end:"C:\Users\Murtada\Desktop\mfqoden\src\pages\mfqodh\mfqodh.html"*/,
+            selector: 'page-mfqodh',template:/*ion-inline-start:"/home/3losh/Desktop/mfqoden/src/pages/mfqodh/mfqodh.html"*/'<ion-header>\n\n  <ion-navbar>\n    <ion-title text-center>المفقودات</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding text-right>\n   \n\n<div> <ion-searchbar (ionInput)=\'getItems($event)\'></ion-searchbar>\n  <ion-list>\n    <ion-item>\n      <ion-label>النوع</ion-label>\n      <ion-select (ionChange)=\'getItemstype($event)\'>\n          <ion-option value="">الكل</ion-option>\n          <ion-option value="مجوهرات" >مجوهرات</ion-option>\n          <ion-option value="نقود">نقود</ion-option>\n          <ion-option value="مستمسكات">مستمسكات</ion-option>\n          <ion-option value="هاتف ">هاتف</ion-option>\n          <ion-option value="اخرى">اخرى</ion-option>\n      </ion-select>\n    </ion-item>\n  </ion-list>\n\n  <ion-card *ngFor=\'let dat of items\'>\n     <img src="../../assets/imgs/logo.png"/>\n    <ion-card-content>\n      <ion-card-title>اسم الشئ:\n    {{dat[1].namem}}\n      </ion-card-title>\n      <p>\n        النوع: {{dat[1].type}}<br>تفاصل اخرى: {{dat[1].commint}}<br>موقع تواجده: {{dat[1].map}}<br>اسم صاحب المنشور: {{dat[1].namep}}<br>رقم الهاتف: {{dat[1].phone}}\n      </p>\n    </ion-card-content>\n  </ion-card>\n</div>\n</ion-content>'/*ion-inline-end:"/home/3losh/Desktop/mfqoden/src/pages/mfqodh/mfqodh.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */],
@@ -524,117 +625,16 @@ var MfqodhPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 169:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AdditemPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__ = __webpack_require__(226);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_storage__ = __webpack_require__(737);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-/**
- * Generated class for the AdditemPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-var AdditemPage = /** @class */ (function () {
-    function AdditemPage(navCtrl, navParams, afStorage, db) {
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-        this.afStorage = afStorage;
-        this.db = db;
-        this.data = {
-            title: '',
-            city: '',
-            type: '',
-            img: '',
-            phone: '',
-            details: '',
-        };
-        this.SelectedFile = null;
-        this.submited = false;
-        this.agenicy = false;
-        this.abouts = false;
-        this.items = db.list('items');
-    }
-    AdditemPage.prototype.OnFileSelected = function (event) {
-        this.SelectedFile = event.target.files[0];
-        //console.log(this.SelectedFile)
-    };
-    AdditemPage.prototype.addItem = function () {
-        var _this = this;
-        this.items.push({
-            title: this.data.title,
-            city: this.data.city,
-            type: this.data.type,
-            img: this.data.img,
-            phone: this.data.phone,
-            details: this.data.details,
-        });
-        this.submited = true;
-        var id = Math.random().toString(36).substring(2);
-        this.afStorage.upload(id, this.SelectedFile).then(function () {
-            _this.ref = _this.afStorage.ref(id);
-            _this.ref.getDownloadURL().subscribe(function (url) {
-                console.log(url);
-                if (url) {
-                    if (_this.imageURL == "") {
-                        _this.imageURL = "assets/imgs/logo.png";
-                    }
-                    _this.imageURL = url;
-                    _this.submited = false;
-                    _this.items.push({
-                        title: _this.data.title,
-                        city: _this.data.city,
-                        type: _this.data.type,
-                        img: _this.imageURL,
-                        phone: _this.data.phone,
-                        details: _this.data.details,
-                    });
-                    //this.router.navigate(['/home'])
-                }
-            });
-        });
-    };
-    AdditemPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-additem',template:/*ion-inline-start:"C:\Users\Murtada\Desktop\mfqoden\src\pages\additem\additem.html"*/'\n\n<ion-content padding>\n\n\n\n    <ion-list class="right" >\n        <ion-item>\n            <ion-label>  <ion-icon ios="ios-alert" md="md-alert" color="color1"> الحالة  </ion-icon></ion-label>\n            <ion-select [(ngModel)]="data.type" multiple="false" okText="تم" cancelText="اغلاق">\n              <ion-option value="lost">فقد</ion-option>\n              <ion-option value="found">عثر</ion-option>\n            </ion-select>\n          </ion-item>\n          <ion-item>\n              <ion-label><ion-icon ios="ios-pin" md="md-pin" color="color1"> المدينة </ion-icon></ion-label>\n              <ion-select [(ngModel)]="data.city" multiple="false" okText="تم" cancelText="اغلاق">\n                <ion-option value="baghdad">بغداد</ion-option>\n                <ion-option value="basra">البصرة</ion-option>\n                <ion-option value="sulimanya">السليمانية</ion-option>\n                <ion-option value="karbala">كربلاء</ion-option>\n                <ion-option value="najaf">النجف</ion-option>\n                <ion-option value="dyala">ديالى</ion-option>\n                <ion-option value="mayssan">ميسان</ion-option>\n                <ion-option value="nassrya">الناصرية</ion-option>\n                <ion-option value="kirkuk">كركوك</ion-option>\n              </ion-select>\n            </ion-item>\n        \n\n        <ion-item >\n          <ion-label> <ion-icon color="color1" ios="ios-contact" md="md-contact"></ion-icon></ion-label>\n          <ion-input [(ngModel)]=\'data.title\' type="text" placeholder="اسم العنصر"></ion-input>\n        </ion-item>\n      \n        <ion-item>\n          <ion-label >  <ion-icon ios="ios-call" md="md-call" color="color1"></ion-icon></ion-label>\n          <ion-input [(ngModel)]=\'data.phone\' type="number" placeholder="رقم الهاتف" ></ion-input>\n        </ion-item>\n        <ion-item>\n            <ion-label >  <ion-icon ios="ios-paper" md="md-paper" color="color1"></ion-icon></ion-label>\n            <ion-input [(ngModel)]=\'data.details\' type="text" placeholder="تفاصيل" ></ion-input>\n          </ion-item>\n        \n          <!-- <div class="uk-margin">\n              <textarea class="uk-textarea" rows="5" placeholder="Details" name="details"[(ngModel)]="data.details"></textarea>\n          </div>\n -->\n\n\n\n\n\n      \n      </ion-list>\n      \n      <div><button ion-button outline class="btn-login" (click)="addItem()"><ion-icon ios="ios-add" md="md-add"> اضف </ion-icon></button></div>\n\n\n\n</ion-content>\n'/*ion-inline-end:"C:\Users\Murtada\Desktop\mfqoden\src\pages\additem\additem.html"*/,
-        }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3_angularfire2_storage__["a" /* AngularFireStorage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_angularfire2_storage__["a" /* AngularFireStorage */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__["a" /* AngularFireDatabase */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__["a" /* AngularFireDatabase */]) === "function" && _d || Object])
-    ], AdditemPage);
-    return AdditemPage;
-    var _a, _b, _c, _d;
-}());
-
-//# sourceMappingURL=additem.js.map
-
-/***/ }),
-
-/***/ 170:
+/***/ 176:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RegisterPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_auth_services_auth_services__ = __webpack_require__(70);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__tabs_tabs__ = __webpack_require__(89);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angularfire2_auth__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_auth_services_auth_services__ = __webpack_require__(72);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__tabs_tabs__ = __webpack_require__(91);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angularfire2_auth__ = __webpack_require__(41);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -682,7 +682,7 @@ var RegisterPage = /** @class */ (function () {
     };
     RegisterPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-register',template:/*ion-inline-start:"C:\Users\Murtada\Desktop\mfqoden\src\pages\register\register.html"*/'\n\n<ion-header>\n\n\n\n  <ion-navbar color="color1">\n\n   \n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n\n\n  \n\n<ion-list style="padding-top:70px">\n\n\n\n  <ion-item >\n\n    <ion-label> <ion-icon color="color1" ios="ios-contact" md="md-contact"></ion-icon></ion-label>\n\n    <ion-input [(ngModel)]=\'email\' type="text" placeholder="البريد"></ion-input>\n\n  </ion-item>\n\n\n\n  <ion-item>\n\n    <ion-label >  <ion-icon color="color1"  ios="ios-key" md="md-key"></ion-icon></ion-label>\n\n    <ion-input [(ngModel)]=\'password\' type="password" placeholder="كلمة المرور" ></ion-input>\n\n  </ion-item>\n\n  <ion-item>\n\n    <ion-label >  <ion-icon color="color1"  ios="ios-key" md="md-key"></ion-icon></ion-label>\n\n    <ion-input [(ngModel)]=\'password\' type="password" placeholder="تأكيد كلمة المرور" ></ion-input>\n\n  </ion-item>\n\n</ion-list>\n\n\n\n<div><button ion-button outline class="btn-login" (click)="register()">تسجيل</button></div>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Murtada\Desktop\mfqoden\src\pages\register\register.html"*/,
+            selector: 'page-register',template:/*ion-inline-start:"/home/3losh/Desktop/mfqoden/src/pages/register/register.html"*/'\n<ion-header>\n\n  <ion-navbar color="color1">\n   \n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n  \n<ion-list style="padding-top:70px">\n\n  <ion-item >\n    <ion-label> <ion-icon color="color1" ios="ios-contact" md="md-contact"></ion-icon></ion-label>\n    <ion-input [(ngModel)]=\'email\' type="text" placeholder="البريد"></ion-input>\n  </ion-item>\n\n  <ion-item>\n    <ion-label >  <ion-icon color="color1"  ios="ios-key" md="md-key"></ion-icon></ion-label>\n    <ion-input [(ngModel)]=\'password\' type="password" placeholder="كلمة المرور" ></ion-input>\n  </ion-item>\n  <ion-item>\n    <ion-label >  <ion-icon color="color1"  ios="ios-key" md="md-key"></ion-icon></ion-label>\n    <ion-input [(ngModel)]=\'password\' type="password" placeholder="تأكيد كلمة المرور" ></ion-input>\n  </ion-item>\n</ion-list>\n\n<div><button ion-button outline class="btn-login" (click)="register()">تسجيل</button></div>\n</ion-content>\n'/*ion-inline-end:"/home/3losh/Desktop/mfqoden/src/pages/register/register.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_2__providers_auth_services_auth_services__["a" /* AuthServicesProvider */],
@@ -696,7 +696,7 @@ var RegisterPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 181:
+/***/ 187:
 /***/ (function(module, exports) {
 
 function webpackEmptyAsyncContext(req) {
@@ -709,56 +709,56 @@ function webpackEmptyAsyncContext(req) {
 webpackEmptyAsyncContext.keys = function() { return []; };
 webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
 module.exports = webpackEmptyAsyncContext;
-webpackEmptyAsyncContext.id = 181;
+webpackEmptyAsyncContext.id = 187;
 
 /***/ }),
 
-/***/ 225:
+/***/ 231:
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
 	"../pages/add/add.module": [
-		722,
+		743,
 		10
 	],
 	"../pages/additem/additem.module": [
-		723,
+		742,
 		9
 	],
 	"../pages/addmfqod/addmfqod.module": [
-		724,
+		744,
 		8
 	],
 	"../pages/addmfqodh/addmfqodh.module": [
-		725,
+		745,
 		7
 	],
 	"../pages/editprofile/editprofile.module": [
-		726,
+		746,
 		6
 	],
 	"../pages/login/login.module": [
-		727,
+		747,
 		5
 	],
 	"../pages/main/main.module": [
-		728,
+		748,
 		4
 	],
 	"../pages/mfqod/mfqod.module": [
-		729,
+		750,
 		3
 	],
 	"../pages/mfqodh/mfqodh.module": [
-		730,
+		749,
 		2
 	],
 	"../pages/mypost/mypost.module": [
-		731,
+		751,
 		1
 	],
 	"../pages/register/register.module": [
-		732,
+		752,
 		0
 	]
 };
@@ -773,18 +773,18 @@ function webpackAsyncContext(req) {
 webpackAsyncContext.keys = function webpackAsyncContextKeys() {
 	return Object.keys(map);
 };
-webpackAsyncContext.id = 225;
+webpackAsyncContext.id = 231;
 module.exports = webpackAsyncContext;
 
 /***/ }),
 
-/***/ 328:
+/***/ 338:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HomePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(12);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -802,7 +802,7 @@ var HomePage = /** @class */ (function () {
     }
     HomePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-home',template:/*ion-inline-start:"C:\Users\Murtada\Desktop\mfqoden\src\pages\home\home.html"*/'\n\n\n\n\n\n<ion-content >\n\n \n\n  <ion-card>\n\n      <ion-card-header>\n\n          <ion-icon color="color6" ios="ios-alert" md="md-alert">  </ion-icon> مفقود\n\n        </ion-card-header>\n\n    <img class="imgcard" src="assets/imgs/download.jpg"/>\n\n    <ion-card-content >\n\n      <ion-card-title color="color3">\n\n        مبايل سامسونك\n\n        </ion-card-title>\n\n      <p color="color2">\n\n        فقد هاتف في محافظة البصرة قرب سوق العشار لون ابيض على من يعثر عليه الاتصال على 099989898989\n\n      </p>\n\n    </ion-card-content>\n\n  </ion-card>\n\n\n\n  <ion-card>\n\n      <ion-card-header>\n\n          <ion-icon color="color5" ios="ios-alert" md="md-alert"></ion-icon> موجود\n\n        </ion-card-header>\n\n    <img class="imgcard" src="assets/imgs/download.jpg"/>\n\n    <ion-card-content >\n\n      <ion-card-title color="color3">\n\n        مبايل سامسونك\n\n        </ion-card-title>\n\n      <p color="color2">\n\n        فقد هاتف في محافظة البصرة قرب سوق العشار لون ابيض على من يعثر عليه الاتصال على 099989898989\n\n      </p>\n\n\n\n\n\n\n\n      <ion-list>\n\n          <ion-item>\n\n            <ion-thumbnail item-start>\n\n              <img src="img/thumbnail-totoro.png">\n\n            </ion-thumbnail>\n\n            <h2>My Neighbor Totoro</h2>\n\n            <p>Hayao Miyazaki • 1988</p>\n\n            <button ion-button clear item-end>View</button>\n\n          </ion-item>\n\n          <ion-item>\n\n              <ion-thumbnail item-start>\n\n                <img src="img/thumbnail-totoro.png">\n\n              </ion-thumbnail>\n\n              <h2>My Neighbor Totoro</h2>\n\n              <p>Hayao Miyazaki • 1988</p>\n\n              <button ion-button clear item-end>View</button>\n\n            </ion-item>\n\n            <ion-item>\n\n                <ion-thumbnail item-start>\n\n                  <img src="img/thumbnail-totoro.png">\n\n                </ion-thumbnail>\n\n                <h2>My Neighbor Totoro</h2>\n\n                <p>Hayao Miyazaki • 1988</p>\n\n                <button ion-button clear item-end>View</button>\n\n              </ion-item>\n\n        </ion-list>\n\n\n\n\n\n\n\n\n\n    </ion-card-content>\n\n  </ion-card>\n\n\n\n\n\n  \n\n\n\n</ion-content>\n\n\n\n'/*ion-inline-end:"C:\Users\Murtada\Desktop\mfqoden\src\pages\home\home.html"*/
+            selector: 'page-home',template:/*ion-inline-start:"/home/3losh/Desktop/mfqoden/src/pages/home/home.html"*/'\n\n\n<ion-content >\n \n  <ion-card>\n      <ion-card-header>\n          <ion-icon color="color6" ios="ios-alert" md="md-alert">  </ion-icon> مفقود\n        </ion-card-header>\n    <img class="imgcard" src="assets/imgs/download.jpg"/>\n    <ion-card-content >\n      <ion-card-title color="color3">\n        مبايل سامسونك\n        </ion-card-title>\n      <p color="color2">\n        فقد هاتف في محافظة البصرة قرب سوق العشار لون ابيض على من يعثر عليه الاتصال على 099989898989\n      </p>\n    </ion-card-content>\n  </ion-card>\n\n  <ion-card>\n      <ion-card-header>\n          <ion-icon color="color5" ios="ios-alert" md="md-alert"></ion-icon> موجود\n        </ion-card-header>\n    <img class="imgcard" src="assets/imgs/download.jpg"/>\n    <ion-card-content >\n      <ion-card-title color="color3">\n        مبايل سامسونك\n        </ion-card-title>\n      <p color="color2">\n        فقد هاتف في محافظة البصرة قرب سوق العشار لون ابيض على من يعثر عليه الاتصال على 099989898989\n      </p>\n\n\n\n      <ion-list>\n          <ion-item>\n            <ion-thumbnail item-start>\n              <img src="img/thumbnail-totoro.png">\n            </ion-thumbnail>\n            <h2>My Neighbor Totoro</h2>\n            <p>Hayao Miyazaki • 1988</p>\n            <button ion-button clear item-end>View</button>\n          </ion-item>\n          <ion-item>\n              <ion-thumbnail item-start>\n                <img src="img/thumbnail-totoro.png">\n              </ion-thumbnail>\n              <h2>My Neighbor Totoro</h2>\n              <p>Hayao Miyazaki • 1988</p>\n              <button ion-button clear item-end>View</button>\n            </ion-item>\n            <ion-item>\n                <ion-thumbnail item-start>\n                  <img src="img/thumbnail-totoro.png">\n                </ion-thumbnail>\n                <h2>My Neighbor Totoro</h2>\n                <p>Hayao Miyazaki • 1988</p>\n                <button ion-button clear item-end>View</button>\n              </ion-item>\n        </ion-list>\n\n\n\n\n    </ion-card-content>\n  </ion-card>\n\n\n  \n\n</ion-content>\n\n'/*ion-inline-end:"/home/3losh/Desktop/mfqoden/src/pages/home/home.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */]])
     ], HomePage);
@@ -813,13 +813,13 @@ var HomePage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 372:
+/***/ 383:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EditprofilePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(12);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -841,7 +841,7 @@ var EditprofilePage = /** @class */ (function () {
     };
     EditprofilePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-editprofile',template:/*ion-inline-start:"C:\Users\Murtada\Desktop\mfqoden\src\pages\editprofile\editprofile.html"*/'\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title text-center>تعدل حسابي</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Murtada\Desktop\mfqoden\src\pages\editprofile\editprofile.html"*/,
+            selector: 'page-editprofile',template:/*ion-inline-start:"/home/3losh/Desktop/mfqoden/src/pages/editprofile/editprofile.html"*/'\n<ion-header>\n\n  <ion-navbar>\n    <ion-title text-center>تعدل حسابي</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n</ion-content>\n'/*ion-inline-end:"/home/3losh/Desktop/mfqoden/src/pages/editprofile/editprofile.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]])
     ], EditprofilePage);
@@ -852,15 +852,15 @@ var EditprofilePage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 373:
+/***/ 384:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MainPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__login_login__ = __webpack_require__(94);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__register_register__ = __webpack_require__(170);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__login_login__ = __webpack_require__(97);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__register_register__ = __webpack_require__(176);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -896,7 +896,7 @@ var MainPage = /** @class */ (function () {
     };
     MainPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-main',template:/*ion-inline-start:"C:\Users\Murtada\Desktop\mfqoden\src\pages\main\main.html"*/'<ion-content padding class="background">\n\n\n\n  <img src="assets/imgs/logo.png" class="center">\n  <h4 class="text-center" >LOST AND FOUND</h4>\n  \n  \n  \n  <!-- <ion-list>\n  \n    <ion-item>\n      <ion-label> <ion-icon color="color2" ios="ios-contact" md="md-contact"></ion-icon></ion-label>\n      <ion-input [(ngModel)]=\'data.email\' type="text"></ion-input>\n    </ion-item>\n  \n    <ion-item>\n      <ion-label>  <ion-icon color="color2"  ios="ios-key" md="md-key"></ion-icon></ion-label>\n      <ion-input [(ngModel)]=\'data.password\' type="password"></ion-input>\n    </ion-item>\n  \n  </ion-list> -->\n  <div ><button  ion-button outline class="btn-reg"(click)="goToReg()" >تسجيل</button></div>\n  <div><button ion-button outline class="btn-login" (click)="login()">دخول</button></div>\n  \n  \n  <!-- <h6 class="text-center" color="color4">او سجل دخول عبر</h6>\n  \n  <ion-grid>\n   \n    <ion-row>\n      <ion-col col-4><button ion-button clear><img src="assets/imgs/logo-facebook.png" class="logo"></button></ion-col>\n      <ion-col col-4><button ion-button clear><img src="assets/imgs/logo-twitter.png" class="logo"></button></ion-col>\n      <ion-col col-4><button ion-button clear><img src="assets/imgs/logo-google.png" class="logo"></button></ion-col>\n    </ion-row>\n  </ion-grid> -->\n  \n  </ion-content>\n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  <!-- \n  \n  \n  \n  <ion-content padding class="">\n  \n    <ion-list>\n  \n      <ion-item >\n        <ion-label floating class="text-right">البريد الالكتروني </ion-label>\n        <ion-input [(ngModel)]=\'data.email\' type="text"></ion-input>\n      </ion-item>\n    \n      <ion-item>\n        <ion-label floating class="text-right">كلمه المرور</ion-label>\n        <ion-input [(ngModel)]=\'data.password\' type="password"></ion-input>\n      </ion-item>\n    <br>\n      <button ion-button color="dark" block style="font-size: 20px" (click)="login()" >تسجيل الدخول </button>\n  <br>\n      <button ion-button color="dark" block outline style="font-size: 20px"(click)="goToReg()">او التسجيل بحساب جديد </button>\n      <br><hr><br>\n  <button ion-button block outline style="font-size: 20px"(click)="logFacebook()">  \n      <ion-grid>\n          <ion-row>\n              <ion-col col-2>\n    <ion-icon name="logo-facebook"></ion-icon> </ion-col>\n    <ion-col col-8>\n    تسجيل دخول بحساب فيسبوك</ion-col>\n  </ion-row>\n  </ion-grid>\n  </button>\n  <br>\n  <button ion-button block outline color="danger" style="font-size: 20px"(click)="logGoogle()">\n     <ion-grid>\n      <ion-row>\n          <ion-col col-2>\n              <ion-icon name="logo-google"></ion-icon>\n          </ion-col>\n  \n        <ion-col col-8>تسجيل دخول بحساب google</ion-col>\n  \n      </ion-row>\n    </ion-grid>\n    </button>\n  \n  \n    </ion-list>\n  \n  </ion-content> -->\n  '/*ion-inline-end:"C:\Users\Murtada\Desktop\mfqoden\src\pages\main\main.html"*/,
+            selector: 'page-main',template:/*ion-inline-start:"/home/3losh/Desktop/mfqoden/src/pages/main/main.html"*/'<ion-content padding class="background">\n\n\n\n  <img src="assets/imgs/logo.png" class="center">\n  <h4 class="text-center" >LOST AND FOUND</h4>\n  \n  \n  \n  <!-- <ion-list>\n  \n    <ion-item>\n      <ion-label> <ion-icon color="color2" ios="ios-contact" md="md-contact"></ion-icon></ion-label>\n      <ion-input [(ngModel)]=\'data.email\' type="text"></ion-input>\n    </ion-item>\n  \n    <ion-item>\n      <ion-label>  <ion-icon color="color2"  ios="ios-key" md="md-key"></ion-icon></ion-label>\n      <ion-input [(ngModel)]=\'data.password\' type="password"></ion-input>\n    </ion-item>\n  \n  </ion-list> -->\n  <div ><button  ion-button outline class="btn-reg"(click)="goToReg()" >تسجيل</button></div>\n  <div><button ion-button outline class="btn-login" (click)="login()">دخول</button></div>\n  \n  \n  <!-- <h6 class="text-center" color="color4">او سجل دخول عبر</h6>\n  \n  <ion-grid>\n   \n    <ion-row>\n      <ion-col col-4><button ion-button clear><img src="assets/imgs/logo-facebook.png" class="logo"></button></ion-col>\n      <ion-col col-4><button ion-button clear><img src="assets/imgs/logo-twitter.png" class="logo"></button></ion-col>\n      <ion-col col-4><button ion-button clear><img src="assets/imgs/logo-google.png" class="logo"></button></ion-col>\n    </ion-row>\n  </ion-grid> -->\n  \n  </ion-content>\n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  <!-- \n  \n  \n  \n  <ion-content padding class="">\n  \n    <ion-list>\n  \n      <ion-item >\n        <ion-label floating class="text-right">البريد الالكتروني </ion-label>\n        <ion-input [(ngModel)]=\'data.email\' type="text"></ion-input>\n      </ion-item>\n    \n      <ion-item>\n        <ion-label floating class="text-right">كلمه المرور</ion-label>\n        <ion-input [(ngModel)]=\'data.password\' type="password"></ion-input>\n      </ion-item>\n    <br>\n      <button ion-button color="dark" block style="font-size: 20px" (click)="login()" >تسجيل الدخول </button>\n  <br>\n      <button ion-button color="dark" block outline style="font-size: 20px"(click)="goToReg()">او التسجيل بحساب جديد </button>\n      <br><hr><br>\n  <button ion-button block outline style="font-size: 20px"(click)="logFacebook()">  \n      <ion-grid>\n          <ion-row>\n              <ion-col col-2>\n    <ion-icon name="logo-facebook"></ion-icon> </ion-col>\n    <ion-col col-8>\n    تسجيل دخول بحساب فيسبوك</ion-col>\n  </ion-row>\n  </ion-grid>\n  </button>\n  <br>\n  <button ion-button block outline color="danger" style="font-size: 20px"(click)="logGoogle()">\n     <ion-grid>\n      <ion-row>\n          <ion-col col-2>\n              <ion-icon name="logo-google"></ion-icon>\n          </ion-col>\n  \n        <ion-col col-8>تسجيل دخول بحساب google</ion-col>\n  \n      </ion-row>\n    </ion-grid>\n    </button>\n  \n  \n    </ion-list>\n  \n  </ion-content> -->\n  '/*ion-inline-end:"/home/3losh/Desktop/mfqoden/src/pages/main/main.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]])
     ], MainPage);
@@ -907,13 +907,13 @@ var MainPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 374:
+/***/ 385:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(375);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(379);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(386);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(390);
 
 
 Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_1__app_module__["a" /* AppModule */]);
@@ -921,41 +921,41 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 
 /***/ }),
 
-/***/ 379:
+/***/ 390:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* unused harmony export firebaseConfig */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__ = __webpack_require__(46);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_component__ = __webpack_require__(715);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_common_http__ = __webpack_require__(719);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_add_add__ = __webpack_require__(163);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_login_login__ = __webpack_require__(94);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_mfqod_mfqod__ = __webpack_require__(167);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_mfqodh_mfqodh__ = __webpack_require__(168);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_register_register__ = __webpack_require__(170);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_about_about__ = __webpack_require__(720);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_contact_contact__ = __webpack_require__(721);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_home_home__ = __webpack_require__(328);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_tabs_tabs__ = __webpack_require__(89);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_addmfqod_addmfqod__ = __webpack_require__(164);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_addmfqodh_addmfqodh__ = __webpack_require__(165);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__pages_editprofile_editprofile__ = __webpack_require__(372);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__pages_mypost_mypost__ = __webpack_require__(166);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__pages_main_main__ = __webpack_require__(373);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__ = __webpack_require__(47);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_component__ = __webpack_require__(729);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_common_http__ = __webpack_require__(733);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_add_add__ = __webpack_require__(170);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_login_login__ = __webpack_require__(97);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_mfqod_mfqod__ = __webpack_require__(174);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_mfqodh_mfqodh__ = __webpack_require__(175);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_register_register__ = __webpack_require__(176);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_about_about__ = __webpack_require__(734);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_contact_contact__ = __webpack_require__(735);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_home_home__ = __webpack_require__(338);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_tabs_tabs__ = __webpack_require__(91);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_addmfqod_addmfqod__ = __webpack_require__(171);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_addmfqodh_addmfqodh__ = __webpack_require__(172);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__pages_editprofile_editprofile__ = __webpack_require__(383);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__pages_mypost_mypost__ = __webpack_require__(173);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__pages_main_main__ = __webpack_require__(384);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pages_additem_additem__ = __webpack_require__(169);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__ionic_native_status_bar__ = __webpack_require__(368);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__ionic_native_splash_screen__ = __webpack_require__(371);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22_angularfire2__ = __webpack_require__(139);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23_angularfire2_database__ = __webpack_require__(226);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__providers_service_data_service_data__ = __webpack_require__(48);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__providers_auth_services_auth_services__ = __webpack_require__(70);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26_angularfire2_auth__ = __webpack_require__(40);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27_angularfire2_firestore__ = __webpack_require__(747);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28_angularfire2_storage__ = __webpack_require__(737);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__ionic_native_status_bar__ = __webpack_require__(378);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__ionic_native_splash_screen__ = __webpack_require__(381);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22_angularfire2__ = __webpack_require__(70);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23_angularfire2_database__ = __webpack_require__(126);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__providers_service_data_service_data__ = __webpack_require__(49);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__providers_auth_services_auth_services__ = __webpack_require__(72);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26_angularfire2_auth__ = __webpack_require__(41);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27_angularfire2_firestore__ = __webpack_require__(736);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28_angularfire2_storage__ = __webpack_require__(332);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1027,15 +1027,15 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__["a" /* BrowserModule */],
                 __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["d" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* MyApp */], {}, {
                     links: [
-                        { loadChildren: '../pages/add/add.module#AddPageModule', name: 'AddPage', segment: 'add', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/additem/additem.module#AdditemPageModule', name: 'AdditemPage', segment: 'additem', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/add/add.module#AddPageModule', name: 'AddPage', segment: 'add', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/addmfqod/addmfqod.module#AddmfqodPageModule', name: 'AddmfqodPage', segment: 'addmfqod', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/addmfqodh/addmfqodh.module#AddmfqodhPageModule', name: 'AddmfqodhPage', segment: 'addmfqodh', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/editprofile/editprofile.module#EditprofilePageModule', name: 'EditprofilePage', segment: 'editprofile', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/main/main.module#MainPageModule', name: 'MainPage', segment: 'main', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/mfqod/mfqod.module#MfqodPageModule', name: 'MfqodPage', segment: 'mfqod', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/mfqodh/mfqodh.module#MfqodhPageModule', name: 'MfqodhPage', segment: 'mfqodh', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/mfqod/mfqod.module#MfqodPageModule', name: 'MfqodPage', segment: 'mfqod', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/mypost/mypost.module#MypostPageModule', name: 'MypostPage', segment: 'mypost', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/register/register.module#RegisterPageModule', name: 'RegisterPage', segment: 'register', priority: 'low', defaultHistory: [] }
                     ]
@@ -1084,13 +1084,13 @@ var AppModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 48:
+/***/ 49:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ServiceDataProvider; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angularfire2_database__ = __webpack_require__(226);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angularfire2_database__ = __webpack_require__(126);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1144,13 +1144,13 @@ var ServiceDataProvider = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 70:
+/***/ 72:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AuthServicesProvider; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angularfire2_auth__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angularfire2_auth__ = __webpack_require__(41);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1191,17 +1191,17 @@ var AuthServicesProvider = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 715:
+/***/ 729:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyApp; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(368);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(371);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_auth_services_auth_services__ = __webpack_require__(70);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_tabs_tabs__ = __webpack_require__(89);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(378);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(381);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_auth_services_auth_services__ = __webpack_require__(72);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_tabs_tabs__ = __webpack_require__(91);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1237,7 +1237,7 @@ var MyApp = /** @class */ (function () {
         // ()=>{this.rootPage= LoginPage})
     }
     MyApp = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"C:\Users\Murtada\Desktop\mfqoden\src\app\app.html"*/'\n\n\n\n<ion-menu [content]="content">\n\n    <ion-header>\n\n      <ion-toolbar color="color1" >\n\n        <ion-title>اعدادات</ion-title>\n\n      </ion-toolbar>\n\n    </ion-header>\n\n  \n\n    <ion-content >\n\n      <ion-list>\n\n        <button  menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">\n\n            <ion-icon color="first" style="padding-left:5px;" ios={{p.icon}} md={{p.md}}></ion-icon>\n\n     {{p.title}}\n\n         \n\n        </button>\n\n      </ion-list>\n\n    </ion-content>\n\n  \n\n  </ion-menu>\n\n  \n\n  <!-- Disable swipe-to-go-back because it\'s poor UX to combine STGB with side menus -->\n\n  <ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>\n\n\n\n\n\n\n\n\n\n<!-- <ion-nav [root]="rootPage"></ion-nav> -->\n\n'/*ion-inline-end:"C:\Users\Murtada\Desktop\mfqoden\src\app\app.html"*/
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"/home/3losh/Desktop/mfqoden/src/app/app.html"*/'\n\n<ion-menu [content]="content">\n    <ion-header>\n      <ion-toolbar color="color1" >\n        <ion-title>اعدادات</ion-title>\n      </ion-toolbar>\n    </ion-header>\n  \n    <ion-content >\n      <ion-list>\n        <button  menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">\n            <ion-icon color="first" style="padding-left:5px;" ios={{p.icon}} md={{p.md}}></ion-icon>\n     {{p.title}}\n         \n        </button>\n      </ion-list>\n    </ion-content>\n  \n  </ion-menu>\n  \n  <!-- Disable swipe-to-go-back because it\'s poor UX to combine STGB with side menus -->\n  <ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>\n\n\n\n\n<!-- <ion-nav [root]="rootPage"></ion-nav> -->\n'/*ion-inline-end:"/home/3losh/Desktop/mfqoden/src/app/app.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */],
             __WEBPACK_IMPORTED_MODULE_4__providers_auth_services_auth_services__["a" /* AuthServicesProvider */]])
@@ -1249,13 +1249,13 @@ var MyApp = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 720:
+/***/ 734:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AboutPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(12);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1273,7 +1273,7 @@ var AboutPage = /** @class */ (function () {
     }
     AboutPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-about',template:/*ion-inline-start:"C:\Users\Murtada\Desktop\mfqoden\src\pages\about\about.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <ion-title>\n\n      About\n\n    </ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Murtada\Desktop\mfqoden\src\pages\about\about.html"*/
+            selector: 'page-about',template:/*ion-inline-start:"/home/3losh/Desktop/mfqoden/src/pages/about/about.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      About\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n\n</ion-content>\n'/*ion-inline-end:"/home/3losh/Desktop/mfqoden/src/pages/about/about.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */]])
     ], AboutPage);
@@ -1284,13 +1284,13 @@ var AboutPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 721:
+/***/ 735:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ContactPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(12);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1308,7 +1308,7 @@ var ContactPage = /** @class */ (function () {
     }
     ContactPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-contact',template:/*ion-inline-start:"C:\Users\Murtada\Desktop\mfqoden\src\pages\contact\contact.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <ion-title>\n\n      Contact\n\n    </ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content>\n\n  <ion-list>\n\n    <ion-list-header>Follow us on Twitter</ion-list-header>\n\n    <ion-item>\n\n      <ion-icon name="ionic" item-start></ion-icon>\n\n      @ionicframework\n\n    </ion-item>\n\n  </ion-list>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Murtada\Desktop\mfqoden\src\pages\contact\contact.html"*/
+            selector: 'page-contact',template:/*ion-inline-start:"/home/3losh/Desktop/mfqoden/src/pages/contact/contact.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      Contact\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n  <ion-list>\n    <ion-list-header>Follow us on Twitter</ion-list-header>\n    <ion-item>\n      <ion-icon name="ionic" item-start></ion-icon>\n      @ionicframework\n    </ion-item>\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"/home/3losh/Desktop/mfqoden/src/pages/contact/contact.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */]])
     ], ContactPage);
@@ -1319,15 +1319,15 @@ var ContactPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 89:
+/***/ 91:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TabsPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__home_home__ = __webpack_require__(328);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mfqod_mfqod__ = __webpack_require__(167);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__mfqodh_mfqodh__ = __webpack_require__(168);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__home_home__ = __webpack_require__(338);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mfqod_mfqod__ = __webpack_require__(174);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__mfqodh_mfqodh__ = __webpack_require__(175);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__additem_additem__ = __webpack_require__(169);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1351,7 +1351,7 @@ var TabsPage = /** @class */ (function () {
         this.tab4Root = __WEBPACK_IMPORTED_MODULE_4__additem_additem__["a" /* AdditemPage */];
     }
     TabsPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"C:\Users\Murtada\Desktop\mfqoden\src\pages\tabs\tabs.html"*/'<ion-tabs color="color1">\n\n  <ion-tab  [root]="tab1Root" tabTitle="الرئيسية" tabIcon="ios-home-outline"></ion-tab>\n\n  <ion-tab [root]="tab2Root" tabTitle="مفقودات" tabIcon="ios-information-circle-outline"></ion-tab>\n\n  <ion-tab [root]="tab3Root" tabTitle="موجودات" tabIcon="ios-checkmark-circle-outline"></ion-tab>\n\n  <ion-tab [root]="tab4Root" tabTitle="اضافة" tabIcon="ios-add-circle-outline"></ion-tab>\n\n  <ion-tab [root]="tab4Root" tabTitle="اعدادات" tabIcon="ios-settings-outline"></ion-tab>\n\n</ion-tabs>\n\n<button ion-button menuToggle>\n\n  <ion-icon name="settings" color="color1"></ion-icon>\n\n</button>\n\n'/*ion-inline-end:"C:\Users\Murtada\Desktop\mfqoden\src\pages\tabs\tabs.html"*/
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"/home/3losh/Desktop/mfqoden/src/pages/tabs/tabs.html"*/'<ion-tabs color="color1">\n  <ion-tab  [root]="tab1Root" tabTitle="الرئيسية" tabIcon="ios-home-outline"></ion-tab>\n  <ion-tab [root]="tab2Root" tabTitle="مفقودات" tabIcon="ios-information-circle-outline"></ion-tab>\n  <ion-tab [root]="tab3Root" tabTitle="موجودات" tabIcon="ios-checkmark-circle-outline"></ion-tab>\n  <ion-tab [root]="tab4Root" tabTitle="اضافة" tabIcon="ios-add-circle-outline"></ion-tab>\n  <ion-tab [root]="tab4Root" tabTitle="اعدادات" tabIcon="ios-settings-outline"></ion-tab>\n</ion-tabs>\n<button ion-button menuToggle>\n  <ion-icon name="settings" color="color1"></ion-icon>\n</button>\n'/*ion-inline-end:"/home/3losh/Desktop/mfqoden/src/pages/tabs/tabs.html"*/
         }),
         __metadata("design:paramtypes", [])
     ], TabsPage);
@@ -1362,16 +1362,16 @@ var TabsPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 94:
+/***/ 97:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_auth_services_auth_services__ = __webpack_require__(70);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__tabs_tabs__ = __webpack_require__(89);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angularfire2_auth__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_auth_services_auth_services__ = __webpack_require__(72);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__tabs_tabs__ = __webpack_require__(91);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angularfire2_auth__ = __webpack_require__(41);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1419,7 +1419,7 @@ var LoginPage = /** @class */ (function () {
     };
     LoginPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-login',template:/*ion-inline-start:"C:\Users\Murtada\Desktop\mfqoden\src\pages\login\login.html"*/'<ion-header >\n\n  <ion-navbar color="color1">\n\n    \n\n  </ion-navbar></ion-header>\n\n<ion-content padding >\n\n\n\n\n\n\n\n<img src="assets/imgs/logo.png" class="lostlogo">\n\n\n\n\n\n\n\n\n\n<ion-list  padding>\n\n\n\n  <ion-item >\n\n    <ion-label> <ion-icon color="color1" ios="ios-contact" md="md-contact"></ion-icon></ion-label>\n\n    <ion-input [(ngModel)]=\'data.email\' type="text" placeholder="البريد"></ion-input>\n\n  </ion-item>\n\n\n\n  <ion-item>\n\n    <ion-label >  <ion-icon color="color1"  ios="ios-key" md="md-key"></ion-icon></ion-label>\n\n    <ion-input [(ngModel)]=\'data.password\' type="password" placeholder="كلمة المرور" ></ion-input>\n\n  </ion-item>\n\n\n\n</ion-list>\n\n\n\n<div><button ion-button outline class="btn-login" (click)="login()">دخول</button></div>\n\n <h6 class="text" color="color1"><b>او الدخول بحساب</b></h6>\n\n\n\n<ion-grid>\n\n  \n\n  <ion-row>\n\n    <ion-col col-4><button ion-button clear><img src="assets/imgs/logo-facebook.png" class="logo"></button></ion-col>\n\n    <ion-col col-4><button ion-button clear><img src="assets/imgs/logo-twitter.png" class="logo"></button></ion-col>\n\n    <ion-col col-4><button ion-button clear><img src="assets/imgs/logo-google.png" class="logo"></button></ion-col>\n\n  </ion-row>\n\n</ion-grid>\n\n\n\n</ion-content>\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n<!-- \n\n\n\n\n\n\n\n<ion-content padding class="">\n\n\n\n  <ion-list>\n\n\n\n    <ion-item >\n\n      <ion-label floating class="text-right">البريد الالكتروني </ion-label>\n\n      <ion-input [(ngModel)]=\'data.email\' type="text"></ion-input>\n\n    </ion-item>\n\n  \n\n    <ion-item>\n\n      <ion-label floating class="text-right">كلمه المرور</ion-label>\n\n      <ion-input [(ngModel)]=\'data.password\' type="password"></ion-input>\n\n    </ion-item>\n\n  <br>\n\n    <button ion-button color="dark" block style="font-size: 20px" (click)="login()" >تسجيل الدخول </button>\n\n<br>\n\n    <button ion-button color="dark" block outline style="font-size: 20px"(click)="goToReg()">او التسجيل بحساب جديد </button>\n\n    <br><hr><br>\n\n<button ion-button block outline style="font-size: 20px"(click)="logFacebook()">  \n\n    <ion-grid>\n\n        <ion-row>\n\n            <ion-col col-2>\n\n  <ion-icon name="logo-facebook"></ion-icon> </ion-col>\n\n  <ion-col col-8>\n\n  تسجيل دخول بحساب فيسبوك</ion-col>\n\n</ion-row>\n\n</ion-grid>\n\n</button>\n\n<br>\n\n<button ion-button block outline color="danger" style="font-size: 20px"(click)="logGoogle()">\n\n   <ion-grid>\n\n    <ion-row>\n\n        <ion-col col-2>\n\n            <ion-icon name="logo-google"></ion-icon>\n\n        </ion-col>\n\n\n\n      <ion-col col-8>تسجيل دخول بحساب google</ion-col>\n\n\n\n    </ion-row>\n\n  </ion-grid>\n\n  </button>\n\n\n\n\n\n  </ion-list>\n\n\n\n</ion-content> -->\n\n'/*ion-inline-end:"C:\Users\Murtada\Desktop\mfqoden\src\pages\login\login.html"*/,
+            selector: 'page-login',template:/*ion-inline-start:"/home/3losh/Desktop/mfqoden/src/pages/login/login.html"*/'<ion-header >\n  <ion-navbar color="color1">\n    \n  </ion-navbar></ion-header>\n<ion-content padding >\n\n\n\n<img src="assets/imgs/logo.png" class="lostlogo">\n\n\n\n\n<ion-list  padding>\n\n  <ion-item >\n    <ion-label> <ion-icon color="color1" ios="ios-contact" md="md-contact"></ion-icon></ion-label>\n    <ion-input [(ngModel)]=\'data.email\' type="text" placeholder="البريد"></ion-input>\n  </ion-item>\n\n  <ion-item>\n    <ion-label >  <ion-icon color="color1"  ios="ios-key" md="md-key"></ion-icon></ion-label>\n    <ion-input [(ngModel)]=\'data.password\' type="password" placeholder="كلمة المرور" ></ion-input>\n  </ion-item>\n\n</ion-list>\n\n<div><button ion-button outline class="btn-login" (click)="login()">دخول</button></div>\n <h6 class="text" color="color1"><b>او الدخول بحساب</b></h6>\n\n<ion-grid>\n  \n  <ion-row>\n    <ion-col col-4><button ion-button clear><img src="assets/imgs/logo-facebook.png" class="logo"></button></ion-col>\n    <ion-col col-4><button ion-button clear><img src="assets/imgs/logo-twitter.png" class="logo"></button></ion-col>\n    <ion-col col-4><button ion-button clear><img src="assets/imgs/logo-google.png" class="logo"></button></ion-col>\n  </ion-row>\n</ion-grid>\n\n</ion-content>\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n<!-- \n\n\n\n<ion-content padding class="">\n\n  <ion-list>\n\n    <ion-item >\n      <ion-label floating class="text-right">البريد الالكتروني </ion-label>\n      <ion-input [(ngModel)]=\'data.email\' type="text"></ion-input>\n    </ion-item>\n  \n    <ion-item>\n      <ion-label floating class="text-right">كلمه المرور</ion-label>\n      <ion-input [(ngModel)]=\'data.password\' type="password"></ion-input>\n    </ion-item>\n  <br>\n    <button ion-button color="dark" block style="font-size: 20px" (click)="login()" >تسجيل الدخول </button>\n<br>\n    <button ion-button color="dark" block outline style="font-size: 20px"(click)="goToReg()">او التسجيل بحساب جديد </button>\n    <br><hr><br>\n<button ion-button block outline style="font-size: 20px"(click)="logFacebook()">  \n    <ion-grid>\n        <ion-row>\n            <ion-col col-2>\n  <ion-icon name="logo-facebook"></ion-icon> </ion-col>\n  <ion-col col-8>\n  تسجيل دخول بحساب فيسبوك</ion-col>\n</ion-row>\n</ion-grid>\n</button>\n<br>\n<button ion-button block outline color="danger" style="font-size: 20px"(click)="logGoogle()">\n   <ion-grid>\n    <ion-row>\n        <ion-col col-2>\n            <ion-icon name="logo-google"></ion-icon>\n        </ion-col>\n\n      <ion-col col-8>تسجيل دخول بحساب google</ion-col>\n\n    </ion-row>\n  </ion-grid>\n  </button>\n\n\n  </ion-list>\n\n</ion-content> -->\n'/*ion-inline-end:"/home/3losh/Desktop/mfqoden/src/pages/login/login.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_2__providers_auth_services_auth_services__["a" /* AuthServicesProvider */],
@@ -1433,5 +1433,5 @@ var LoginPage = /** @class */ (function () {
 
 /***/ })
 
-},[374]);
+},[385]);
 //# sourceMappingURL=main.js.map
